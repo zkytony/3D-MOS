@@ -7,17 +7,17 @@ from OpenGL.arrays import *
 
 import numpy as np
 
-from moos3d.models.world.objects import *
-from moos3d.models.world.robot import Robot
-from moos3d.models.world.world import GridWorld
-from moos3d.oopomdp import TargetObjectState, RobotState, MOTION_ACTION_NAMES, MOTION_ACTIONS,\
+from mos3d.models.world.objects import *
+from mos3d.models.world.robot import Robot
+from mos3d.models.world.world import GridWorld
+from mos3d.oopomdp import TargetObjectState, RobotState, MOTION_ACTION_NAMES, MOTION_ACTIONS,\
     Actions, SimLookAction, LookAction, DetectAction, SimMotionAction, MOTION_MODEL
-from moos3d.environment.env import parse_worldstr, Mos3DEnvironment
-from moos3d.models.observation\
+from mos3d.environment.env import parse_worldstr, Mos3DEnvironment
+from mos3d.models.observation\
     import OOObservation, ObjectObservationModel, VoxelObservationModel, M3ObservationModel
-from moos3d.models.transition import M3TransitionModel
-from moos3d.models.reward import GoalRewardModel, GuidedRewardModel
-import moos3d.util as util
+from mos3d.models.transition import M3TransitionModel
+from mos3d.models.reward import GoalRewardModel, GuidedRewardModel
+import mos3d.util as util
 from pomdp_py import Environment, ObjectState, OOState
 # from pomdp_py import Environment, OOPOMDP_ObjectState, BeliefState, OOPOMDP_State, OOPOMCP_Histogram
 
@@ -34,7 +34,7 @@ class Mos3DViz:
         self._gridworld = gridworld
         self._object_poses = env.object_poses  # objects are static; get this dictionary beforehand.
         self._fps = fps
-        self._playtime = 0        
+        self._playtime = 0
         self._width = 500
         self._height = self._width
         self._controllable = controllable   # True if the user can control the robot
@@ -47,7 +47,7 @@ class Mos3DViz:
         self._last_real_action = None
         self._last_search_region = (None, False)  # ranges, refresh
         self._info = None # info to show on window's title
-        
+
     @property
     def gridworld(self):
         return self._gridworld
@@ -71,7 +71,7 @@ class Mos3DViz:
         else:
             window_width = self._width*2
             window_height = self._height
-        
+
         self._display_surf = pygame.display.set_mode((window_width,
                                                       window_height),
                                                       DOUBLEBUF | OPENGL)
@@ -80,7 +80,7 @@ class Mos3DViz:
             self._init_camera_viewport()
         self._init_main_viewport()
 
-        self._gridworld.init_render()        
+        self._gridworld.init_render()
 
         glEnable(GL_DEPTH_TEST)  # order object according to depth
         glEnable(GL_BLEND)  # enable alpha
@@ -142,13 +142,13 @@ class Mos3DViz:
             self._rerender = True  # render again
             if not self._handle_move_camera_event(event):
                 # A test; can comment out.
-                action = None                
-                
+                action = None
+
                 a = self._handle_control_robot_event(event)
                 if a is not None:
                     # motion action
                     action = SimMotionAction(a, motion_model=self._motion_model)
-                    self._last_real_action = action                    
+                    self._last_real_action = action
                     # self._env.move_robot(self._env.robot_pose, u[0], u[1],
                     #                      motion_model=self._motion_model)
                 else:
@@ -184,12 +184,12 @@ class Mos3DViz:
             self._last_observation = o
         else:
             self._last_observation = None
-        
+
 
     def on_render(self, rerender=None):
         self._info["playtime"] = self._playtime
         self._info["fps"] = self._clock.get_fps()
-        #    Detected Objects: %s"\        
+        #    Detected Objects: %s"\
         text = "FPS: %.2f   Playtime: %.2f    Action: %s    Resolution: %d"\
             % (self._info["fps"], self._info["playtime"], self._info["action"],
                self._info["resolution"])#, self._info["detected_objects"])
@@ -218,10 +218,10 @@ class Mos3DViz:
             self._set_viewport(1)
             self._look_at_scene(1)
             glMatrixMode(GL_MODELVIEW)
-            glLoadIdentity()  
+            glLoadIdentity()
             self._render_axes()
             self._render_observation()
-            
+
             # Robot camera viewport
             self._set_viewport(2)
             self._look_from_robot()
@@ -229,7 +229,7 @@ class Mos3DViz:
             glLoadIdentity()
             self._gridworld.render(self._env.robot_pose,
                                    self._object_poses, gridlines=False) # Draw the gridworld
-            
+
             glDisableClientState(GL_VERTEX_ARRAY)
             self._rerender = False
         pygame.display.flip()
@@ -283,7 +283,7 @@ class Mos3DViz:
         elif event.key == pygame.K_RIGHT:
             self._viewport0_rotz += 5
         elif event.key == pygame.K_UP:
-            self._viewport0_rotp -= 5                
+            self._viewport0_rotp -= 5
         elif event.key == pygame.K_DOWN:
             self._viewport0_rotp += 5
         else:
@@ -302,7 +302,7 @@ class Mos3DViz:
             elif event.key == pygame.K_l:
                 a = "look-thy"
             elif event.key == pygame.K_u:
-                a = "look+thz"                
+                a = "look+thz"
             elif event.key == pygame.K_m:
                 a = "look-thz"
         return a
@@ -321,7 +321,7 @@ class Mos3DViz:
             elif event.key == pygame.K_f:
                 a = 3
             elif event.key == pygame.K_x:
-                a = 4                
+                a = 4
             elif event.key == pygame.K_w:
                 a = 5
         if self._motion_model == "AXIS":
@@ -334,7 +334,7 @@ class Mos3DViz:
             elif event.key == pygame.K_f:
                 a = 3
             elif event.key == pygame.K_x:
-                a = 4                
+                a = 4
             elif event.key == pygame.K_w:
                 a = 5
             elif event.key == pygame.K_e:
@@ -382,7 +382,7 @@ class Mos3DViz:
                                              0.1,
                                              max(self._gridworld.width,
                                                  self._gridworld.length,
-                                                 self._gridworld.height)*5)        
+                                                 self._gridworld.height)*5)
         glTranslatef(0, 0, -min(self._gridworld.width,
                                 self._gridworld.length,
                                 self._gridworld.height)*3)
@@ -412,19 +412,19 @@ class Mos3DViz:
         #                0.1,
         #                max(self._gridworld.width,
         #                    self._gridworld.length,
-        #                    self._gridworld.height)*5)                
+        #                    self._gridworld.height)*5)
         gluPerspective(camera_model.fov,
                        camera_model.aspect_ratio,
                        camera_model.near,
                        camera_model.far+0.1)
-        glRotatef(-90, 0, 0, 1)                
+        glRotatef(-90, 0, 0, 1)
 
         camera_pose = self._gridworld.robot.camera_pose(self._env.robot_pose)
         rx, ry, rz, qx, qy, qz, qw = camera_pose
         thx, thy, thz = util.quat_to_euler(qx, qy, qz, qw)
-        glRotatef(-thz, 0, 0, 1)        
-        glRotatef(-thy, 0, 1, 0)                
-        glRotatef(-thx, 1, 0, 0)        
+        glRotatef(-thz, 0, 0, 1)
+        glRotatef(-thy, 0, 1, 0)
+        glRotatef(-thx, 1, 0, 0)
         glTranslatef(-rx-0.5,
                      -ry-0.5,
                      -rz-0.5)
@@ -441,7 +441,7 @@ class Mos3DViz:
         elif num == 2:
             util.set_viewport(0, self._height, self._width, self._height)
         # elif num == 3:
-        #     util.set_viewport(self._width, 0, self._width, self._height)            
+        #     util.set_viewport(self._width, 0, self._width, self._height)
         else:
             raise ValueError("Invalid viewport %d" % num)
 
@@ -469,15 +469,15 @@ class Mos3DViz:
         self._viewport2_rotz = 0
         self._viewport2_rotp = 0
         # Modelview matrix - everything afterwards is about modelview (unless camera changes)
-        glMatrixMode(GL_MODELVIEW)        
-        
+        glMatrixMode(GL_MODELVIEW)
+
     def _render_axes(self):
         # Draw axes
         glEnableClientState(GL_COLOR_ARRAY);
         glBindBuffer(GL_ARRAY_BUFFER, self._axes_vertex_vbo);
         glVertexPointer(3, GL_FLOAT, 0, None);
         glBindBuffer(GL_ARRAY_BUFFER, self._axes_color_vbo);
-        glColorPointer(3, GL_FLOAT, 0, None);        
+        glColorPointer(3, GL_FLOAT, 0, None);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self._axes_index_vbo);
         glDrawElements(GL_LINES, 6, GL_UNSIGNED_INT, None)
         glDisableClientState(GL_COLOR_ARRAY)
@@ -493,7 +493,7 @@ class Mos3DViz:
             self._last_search_region = (ranges, False)
         if ranges is not None:
             self._gridworld.render_search_region(ranges)
-        
+
 # ----------- Testing -------------
 world1 =\
 """
@@ -605,7 +605,7 @@ if __name__ == "__main__":
 
     T = M3TransitionModel(gridworld)
     R = GoalRewardModel(gridworld)
-    
+
     env = Mos3DEnvironment(init_state, gridworld, T, R)
     env = Mos3DViz(env, gridworld, fps=15)
     for action in env.on_execute():

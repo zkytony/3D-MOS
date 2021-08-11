@@ -1,0 +1,17 @@
+*~
+.\#*
+\#*
+moos3d/experiments/TMP_plots/*
+moos3d/experiments/*.txt
+moos3d/experiments/*.png
+moos3d/experiments/results/*
+moos3d/hierarchical/old/tests/figures/*
+moos3d/videos/*
+moos3d/hierarchical/figs/*
+moos3d/OLDexperiments
+moos3d/tests/results
+moos3d/tests/experiments/results
+moos3d/tests/experiments/results_protected
+moos3d/robot_demo/artags
+docs/videos
+moos3d/tests/experiments/frames

@@ -1,0 +1,61 @@
+# prior for the test_simple environment
+0:
+  regions:
+    # don't believe the object is that high
+    - pose: [0, 0, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [0, 2, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [2, 0, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [2, 2, 2]
+      belief: 0
+      resolution_level: 4
+    # groundtruth
+    # - pose: [1.35, 1.66, 1.02]
+    #   belief: 100000
+    #   resolution_level: 1
+  
+1:
+  regions:
+      # don't believe the object is that high
+    - pose: [0, 0, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [0, 2, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [2, 0, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [2, 2, 2]
+      belief: 0
+      resolution_level: 4
+    # groundtruth
+    # - pose: [2.8, 0, 0.9]
+    #   belief: 100000
+    #   resolution_level: 1
+
+2:
+  regions:
+      # don't believe the object is that high
+    - pose: [0, 0, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [0, 2, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [2, 0, 2]
+      belief: 0
+      resolution_level: 4
+    - pose: [2, 2, 2]
+      belief: 0
+      resolution_level: 4
+    # groundtruth
+    # - pose: [0, 1.8, 1.30]
+    #   belief: 100000
+    #   resolution_level: 1      
+

@@ -1,10 +1,10 @@
 import pomdp_py
-from moos3d.oopomdp import RobotState, TargetObjectState, M3OOState,\
+from mos3d.oopomdp import RobotState, TargetObjectState, M3OOState,\
     Actions, CAMERA_INSTALLATION_POSE, MotionAction
-from moos3d.models.world.sensor_model import FrustumCamera
-from moos3d.models.world.world import GridWorld, OBJECT_MANAGER
-from moos3d.models.world.robot import Robot
-import moos3d.util as util
+from mos3d.models.world.sensor_model import FrustumCamera
+from mos3d.models.world.world import GridWorld, OBJECT_MANAGER
+from mos3d.models.world.robot import Robot
+import mos3d.util as util
 import copy
 import time
 import random
@@ -118,7 +118,7 @@ def parse_worldstr(worldstr, robot_id=0):
                     camera_model = FrustumCamera(fov, asp, near, far)
                     occlusion_enabled = True
                 robot = Robot(robot_id,
-                              CAMERA_INSTALLATION_POSE, 
+                              CAMERA_INSTALLATION_POSE,
                               camera_model,
                               objtype=objtype)  # only supports one robot per world now.
                 # use quaternion
@@ -177,13 +177,13 @@ def random_3dworld(config):
         return pose
 
     objm = OBJECT_MANAGER
-    
+
     # generate a world string
     occupied_voxels = set({})
     objects = {}
     world_str = "%s\n%s\n%s\n\n" % (config['width'], config['length'], config['height'])
     objid = 0
-    seconds = 10  # time to try generating a pose    
+    seconds = 10  # time to try generating a pose
     for objtype in config['objtypes']:
         info = objm.info(objtype)
         objects[objid] = info[0](objid, objtype=objtype)
@@ -194,7 +194,7 @@ def random_3dworld(config):
             if pose is None:
                 raise ValueError("Cannot find a place to put a %s after %d seconds of trying!"
                                  % (objtype, seconds))
-        
+
             for cube_pose in objects[objid].cube_poses(*pose):
                 occupied_voxels.add(tuple(cube_pose))
 
@@ -208,7 +208,7 @@ def random_3dworld(config):
         rx, ry, rz = pose
     else:
         raise ValueError("Cannot find a place to put robot after %d seconds of trying!"
-                                 % (seconds))        
+                                 % (seconds))
     world_str += "robot %d %d %d 0 0 0 %s" % (rx, ry, rz, config['robot_camera'])
     return world_str
 
@@ -259,4 +259,3 @@ class Mos3DEnvironment(pomdp_py.Environment):
             if next_state.robot_pose[:3] == self.state.robot_pose[:3]:
                 return False
         return True
-

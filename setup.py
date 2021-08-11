@@ -11,7 +11,7 @@ setup(name='mos3d',
           'matplotlib',
           'pygame',        # for some tests
           'opencv-python',  # for some tests
-          'scipy',
+          'scipy==1.7.0',
           'PyOpenGL',
           'PyOpenGL_accelerate'
       ],

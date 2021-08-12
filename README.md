@@ -33,4 +33,6 @@ The required python version is Python 3.6+.
    python test_abstraction.py
    ```
 
+   ![world1.png](docs/figs/sim-example-world1.png)
+
    ![output_test_abstraction.png](docs/figs/sim-example-occ.png)

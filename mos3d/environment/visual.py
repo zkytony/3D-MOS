@@ -584,29 +584,15 @@ robot 3 1 0 0 0 0 occlusion 45 1.0 0.1 4
 """
 
 if __name__ == "__main__":
-    gridworld, init_state = parse_worldstr(worldocc2)
-
-    # print("** TEST Observation Model")
-    # oo = VoxelObservationModel(1, gridworld, observe_when_look=False)
-    # objo = oo.sample(init_state, None)
-    # # for vp in objo.voxels:
-    # #     if objo.voxels[vp].label == 1:
-    # #         print(vp)
-    # print(init_state.object_poses[1])
-    # print(objo)
-    # print(oo.probability(objo, init_state, None))
-
-    # oo = M3ObservationModel(gridworld, voxel_model=True)
-    # objo = oo.sample(init_state, None)
-    # print(objo)
+    gridworld, init_state = parse_worldstr(world1)
 
     camera_pose = gridworld._robot.camera_pose(init_state.robot_pose)
-    print(gridworld._robot.camera_model.perspectiveTransform(0,0,0, camera_pose))#(0,0,0,0,0,0,1)))#camera_pose))
+    print(gridworld._robot.camera_model.perspectiveTransform(0,0,0, camera_pose))
 
     T = M3TransitionModel(gridworld)
     R = GoalRewardModel(gridworld)
 
     env = Mos3DEnvironment(init_state, gridworld, T, R)
-    env = Mos3DViz(env, gridworld, fps=15)
-    for action in env.on_execute():
+    viz = Mos3DViz(env, gridworld, fps=15)
+    for action in viz.on_execute():
         pass

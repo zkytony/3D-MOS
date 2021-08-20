@@ -1,0 +1,25 @@
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+escape ^Oo
+
+# huge scrollback buffer
+defscrollback 5000
+
+# 256 colors
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+# mouse tracking allows to switch region focus by clicking
+# mousetrack on
+
+screen -t pomdp
+stuff "cd ~/movo_ws/src/movo_tutorials/movo_object_search; rosparam load config/yaml/region_search.yaml; rosparam load config/yaml/regions_info.yaml"
+screen -t image_proc
+screen -t rviz
+screen -t blank
+stuff "sudo route add -net 10.66.171.0 netmask 255.255.255.0 gw 138.16.161.17 dev wlp3s0"
+screen -t blank
+screen -t moos3d
+stuff "cd /home/kaiyuzh/repo/3d-moos-pomdp/moos3d; p7"

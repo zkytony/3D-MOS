@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="map_file" default="cit122"/>
+  <arg name="scan_topic" default="/movo/base_scan_filtered"/>
+  <arg name="resolution" default="0.3"/>
+
+  <!-- Lanch no-go map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find movo_demos)/maps/$(arg map_file).yaml">
+    <remap from="/map" to="/map_nogo"/>
+  </node>
+
+  <!-- Run the topo map marker publisher -->
+  <node pkg="movo_object_search" type="topo_marker_publisher.py" name="topo_marker_publisher"
+        output="screen">
+    <!-- All params -->
+    <rosparam command="load" file="$(find movo_object_search)/config/yaml/region_search.yaml"/>
+    <param name="resolution" value="$(arg resolution)"/>
+  </node>
+  
+</launch>

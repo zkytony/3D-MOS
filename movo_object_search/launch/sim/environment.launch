@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="false"/>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="world" default="worlds/tabletop_cube.sdf"/>
+  <arg name="x"   default="1.3"/>
+  <arg name="y"   default="0.0"/>
+  <arg name="z"   default="0.0"/>
+
+  <!-- startup simulated world -->
+  <env name="GAZEBO_MODEL_PATH" value="$(find movo_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find movo_gazebo):$(optenv GAZEBO_RESOURCE_PATH)"/>
+
+  <!-- <!-\- startup simulated world -\-> -->
+  <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"> -->
+  <!--     <arg name="world_name" value="$(arg world)"/> -->
+  <!--     <arg name="paused" value="$(arg paused)"/> -->
+  <!--     <arg name="gui" value="$(arg gui)"/> -->
+  <!--     <arg name="verbose" value="true" /> -->
+  <!-- </include>     -->
+
+  <include file="$(find movo_gazebo)/launch/movo_no_arms.launch">
+    <arg name="world" value="$(find movo_gazebo)/$(arg world)"/>
+    <arg name="limited" value="$(arg limited)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="x"   value="$(arg x)"/>
+    <arg name="y"   value="$(arg y)"/>
+    <arg name="z"   value="$(arg z)"/>
+  </include>
+
+  <!-- marker detector -->
+  <node pkg="aruco_ros" type="marker_publisher"  name="aruco_marker_publisher">
+    <remap from="/camera_info"       to="/movo_camera/sd/camera_info" />
+    <remap from="/image"             to="/movo_camera/sd/image_color" />
+    <param name="image_is_rectified" value="True"/>
+    <param name="marker_size"        value="0.1778"/>
+    <param name="reference_frame"    value="base_link"/>   <!-- frame in which the marker pose will be expressed -->
+    <param name="camera_frame"       value="movo_camera_ir_optical_frame"/>
+    <param name="marker_frame"       value="aruco_frame" />
+    <param name="corner_refinement"  value="SUBPIX" />
+  </node>
+  
+</launch>

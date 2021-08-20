@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Bring up the platform in sim with all models, controllers, sensors estimates -->
+  <node pkg="si_utils" type="timed_roslaunch"
+        args="1 movo_object_search environment.launch"
+        name="sim_bringup" output="screen"/>
+  
+  <!-- Bring up the joystick for control -->
+  <node pkg="si_utils" type="timed_roslaunch"
+        args="7 movo_remote_teleop movo_remote_teleop.launch"
+        name="joy_bringup" output="screen"/>
+
+  <!-- Bring up the moveit -->
+  <node if="$(optenv MOVO_HAS_KINOVA_ARM_6DOF false)" pkg="si_utils" type="timed_roslaunch"
+        args="10 movo_moveit_config movo_moveit_planning_execution.launch sim:=true info:=true"
+        name="moveit_bringup" output="screen"/>
+  
+  <node if="$(optenv MOVO_HAS_KINOVA_ARM_7DOF false)" pkg="si_utils" type="timed_roslaunch"
+        args="10 movo_7dof_moveit_config movo_moveit_planning_execution.launch sim:=true info:=true"
+        name="moveit_bringup" output="screen"/>
+
+  <!-- Bring up the demo -->
+  <node pkg="si_utils" type="timed_roslaunch"
+        args="18 movo_gazebo init_sim.xml"
+        name="init_sim_bringup" output="screen"/>   
+</launch>
+
+
+<!-- <?xml version="1.0"?> -->
+<!-- <launch> -->
+<!--     <arg name="limited" default="false"/> -->
+<!--     <arg name="paused" default="false"/> -->
+<!--     <arg name="gui" default="true"/> -->
+<!--     <arg name="world" default="worlds/tabletop_cube.sdf"/> -->
+<!--     <arg name="x"   default="0.0"/> -->
+<!--     <arg name="y"   default="0.0"/> -->
+<!--     <arg name="z"   default="0.0"/> -->
+<!--     <arg name="rviz"  default="true"/> -->
+
+<!--     <!-\- send robot urdf to param server -\-> -->
+<!--     <include file="$(find movo_description)/launch/movo_upload.launch"/> -->
+
+<!--     <!-\- Robot state publisher -\-> -->
+<!--     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"> -->
+<!--       <param name="publish_frequency" type="double" value="100.0" /> -->
+<!--       <param name="tf_prefix" type="string" value="" /> -->
+<!--     </node> -->
+
+<!--     <!-\- startup simulated world -\-> -->
+<!--     <env name="GAZEBO_MODEL_PATH" value="$(find movo_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/> -->
+<!--     <env name="GAZEBO_RESOURCE_PATH" value="$(find movo_gazebo):$(optenv GAZEBO_RESOURCE_PATH)"/> -->
+<!--     <include file="$(find gazebo_ros)/launch/empty_world.launch"> -->
+<!--         <arg name="world_name" value="$(arg world)"/> -->
+<!--         <arg name="paused" value="$(arg paused)"/> -->
+<!--         <arg name="gui" value="$(arg gui)"/> -->
+<!--         <arg name="verbose" value="true" /> -->
+<!--     </include> -->
+
+<!--     <!-\- push robot_description to factory and spawn robot in gazebo -\-> -->
+<!--     <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"  -->
+<!--     args="-urdf -param /robot_description -model movo -x $(arg x) -y $(arg y) -z $(arg z)"  -->
+<!--     respawn="false" output="screen" /> -->
+
+<!--     <rosparam file="$(find movo_gazebo)/controller/head_controller.yaml" command="load"/> -->
+<!--     <rosparam file="$(find movo_gazebo)/controller/torso_controller.yaml" command="load"/> -->
+<!--     <rosparam file="$(find movo_gazebo)/controller/joint_state_controller.yaml" command="load"/> -->
+<!--     <node name="default_controller_spawner" pkg="controller_manager" -->
+<!--           type="controller_manager" args="spawn -->
+<!--                                movo/torso_controller -->
+<!--                                movo/head_controller -->
+<!--                                joint_state_controller"/> -->
+    
+<!--     <node pkg="movo_gazebo" name="sim_odometry" type="sim_odometry" output="screen"/> -->
+    
+<!--     <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen"> -->
+<!--         <param name="destination_frame" value="base_link"/> -->
+<!--         <param name="cloud_destination_topic" value="/movo/merged_cloud"/> -->
+<!--         <param name="scan_destination_topic" value="/movo/scan_multi"/> -->
+<!--         <param name="laserscan_topics" value ="/movo/$(optenv LASER1_PREFIX front)_scan /movo/$(optenv LASER2_PREFIX rear)_scan"/> -->
+<!--     </node> -->
+<!--     <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="movo_laser_filter" clear_params="true" respawn="true"> -->
+<!--         <remap from="scan" to="/movo/scan_multi" /> -->
+<!--         <remap from="scan_filtered" to="/movo/base_scan_filtered" /> -->
+<!--         <param name="target_frame" value="base_link" /> -->
+<!--         <param name="high_fidelity" value="true" /> -->
+<!--         <rosparam command="load"  -->
+<!--             file="$(find movo_bringup)/launch/sensors/config/laser_scan_filter.yaml" /> -->
+<!--     </node> -->
+    
+<!--     <group ns="movo/head_controller"> -->
+<!--         <node name="point_head_action" pkg="head_action" type="head_action" output="screen" > -->
+
+<!--             <!-\- Necessary params -\-> -->
+<!--             <rosparam> -->
+<!--                 success_angle_threshold: 0.01 -->
+<!--                 pan_link: pan_link -->
+<!--                 default_pointing_frame: movo_camera_link -->
+<!--             </rosparam> -->
+<!--         </node> -->
+<!--     </group> -->
+
+<!--     <!-\- marker detector -\-> -->
+<!--     <node pkg="aruco_ros" type="marker_publisher"  name="aruco_marker_publisher"> -->
+<!--         <remap from="/camera_info"       to="/movo_camera/sd/camera_info" /> -->
+<!--         <remap from="/image"             to="/movo_camera/sd/image_color" /> -->
+<!--         <param name="image_is_rectified" value="True"/> -->
+<!--         <param name="marker_size"        value="0.1778"/> -->
+<!--         <param name="reference_frame"    value="base_link"/>   <!-\- frame in which the marker pose will be expressed -\-> -->
+<!--         <param name="camera_frame"       value="movo_camera_ir_optical_frame"/> -->
+<!--         <param name="marker_frame"       value="aruco_frame" /> -->
+<!--         <param name="corner_refinement"  value="SUBPIX" /> -->
+<!--     </node> -->
+
+<!-- </launch> -->

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- The default topics are for the real robot. -->
+  <arg name="camera_info_topic" default="/movo_camera/sd/camera_info"/>
+  <arg name="camera_image_topic" default="/movo_camera/sd/image_color_rect"/>
+  <arg name="marker_size" default="0.05" />
+  
+  <!-- marker detector -->
+  <node pkg="aruco_ros" type="marker_publisher"  name="aruco_marker_publisher">
+    <remap from="/camera_info"       to="$(arg camera_info_topic)" />
+    <remap from="/image"             to="$(arg camera_image_topic)" />
+    <param name="image_is_rectified" value="True"/>
+    <param name="marker_size"        value="$(arg marker_size)"/>
+    <param name="reference_frame"    value="base_link"/>   <!-- frame in which the marker pose will be expressed -->
+    <param name="camera_frame"       value="movo_camera_ir_optical_frame"/>
+    <param name="marker_frame"       value="aruco_frame" />
+    <param name="corner_refinement"  value="SUBPIX" />
+  </node>
+</launch>

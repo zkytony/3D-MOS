@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="region_origin_x" default="0.0"/>
+  <arg name="region_origin_y" default="0.0"/>
+  <arg name="search_space_dimension" default="16"/>
+  <arg name="search_space_resolution" default="0.3"/>
+  <arg name="topo_map_file" default="$(find movo_object_search)/maps/topo_map.json"/>
+  <arg name="observation_file" default="$(find movo_object_search)/tmp/obs_info.yaml"/>
+  <arg name="action_file" default="$(find movo_object_search)/tmp/action_info.yaml"/>
+  <arg name="prior_file" default="$(find movo_object_search)/tmp/prior.yaml"/>
+
+  <!-- Region search -->  
+  <node pkg="movo_object_search" type="search_in_region.py" name="region_object_search" launch-prefix="xterm -e python -m pdb">
+    <rosparam command="load" file="$(find movo_object_search)/config/yaml/region_search.yaml"/>
+    <!-- <param name="region_origin_x"          value="$(arg region_origin_x)"/> -->
+    <!-- <param name="region_origin_y"          value="$(arg region_origin_y"/>        -->
+    <!-- <param name="search_space_dimension"   value="$(arg search_space_dimension)"/> -->
+    <!-- <param name="search_space_resolution"  value="$(arg search_space_resolution)"/> -->
+    <!-- <param name="topo_map_file"            value="$(arg topo_map_file)"/> -->
+    <!-- <param name="observation_file"         value="$(arg observation_file)"/> -->
+    <!-- <param name="action_file"              value="$(arg action_file)"/> -->
+    <!-- <param name="prior_file"               value="$(arg prior_file)"/> -->
+  </node>
+</launch>

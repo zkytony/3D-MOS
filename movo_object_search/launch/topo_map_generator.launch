@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!-- Topological map generator using the sara_mapping tools -->
+<launch>
+
+  <arg name="map_id" default="test" />
+  <arg name="robot_pose_topic" default="/amcl_pose"/>
+  <!-- Below parameter actually never used in the topo map generation code. -->
+  <arg name="camera_pose_topic" default="/camera_pose_topic"/>
+  
+  <!-- Topological map node -->
+  <node name="topo_places_mapping" pkg="sara_topo_places_mapping" type="topo_places_mapping"
+	      output="screen" required="true">
+    <param name="map_id" value="$(arg map_id)" />
+    <remap from="~metric_map" to="/map" />
+    <remap from="~robot_pose" to="$(arg robot_pose_topic)" />
+    <!-- Below parameter actually never used in the topo map generation code. -->
+    <remap from="~camera_pose" to="$(arg camera_pose_topic)" />  
+    <remap from="~move_base/local_costmap/costmap" to="/move_base/local_costmap/costmap" />
+    <remap from="~scan_max" to="/scan" />
+    <remap from="~octomap" to="/octomap_binary" />
+  </node>
+
+</launch>

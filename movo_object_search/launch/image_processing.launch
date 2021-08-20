@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="res_info" default="sd"/>
+  <arg name="res_depth" default="sd"/>  
+  <arg name="camera_info_topic" default="movo_camera/$(arg res_info)/camera_info"/>
+  <arg name="camera_compressed_image_topic" default="movo_camera/$(arg res_depth)/image_depth_rect"/>
+  <arg name="camera_image_topic" default="image_transport/depth_image_raw"/>
+
+  <!-- Nodelet manager for this pipeline -->
+  <node pkg="nodelet" type="nodelet" args="manager"
+        name="cloudify_manager" output="screen"/>
+
+  <!-- Start image_transport republisher and depth_image_proc -->
+  <node pkg="topic_tools" type="relay" name="relay_camera_info"
+        args="$(arg camera_info_topic) /image_transport/camera_info" />
+  <node pkg="image_transport" type="republish" name="depth_decompressor"
+        output="screen"
+        args="compressed in:=$(arg camera_compressed_image_topic)
+             raw out:=$(arg camera_image_topic)">
+  </node>
+
+  <!-- Start the depth_image_proc -->
+  <node pkg="nodelet" type="nodelet" name="cloudify_depth"
+        args="load depth_image_proc/point_cloud_xyz cloudify_manager --no-bond"
+        output="screen">
+    <remap from="camera_info" to="/image_transport/camera_info"/> <!--$(arg camera_info_topic)"/> -->
+    <remap from="image_rect" to="/image_transport/depth_image_raw"/>
+    <param name="queue_size" value="10"/>
+  </node> 
+</launch>

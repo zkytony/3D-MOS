@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- Launches the necessary components for navigation -->
+<launch>
+  <arg name="map_file" default="test_simple"/>
+  <arg name="topo_map_file" default="$(find movo_object_search)/maps/topo_map.json"/>  
+
+  <!-- Navigation -->
+  <include file="$(find movo_object_search)/launch/sim/navigation.launch">
+    <arg name="map_file" value="$(arg map_file)"/>
+  </include>
+
+  <!-- Rviz -->
+  <include file="$(find movo_object_search)/launch/viz/viz_object_search.launch"/>
+
+  <!-- Region search -->
+  <include file="$(find movo_object_search)/launch/sim/region_search.launch">
+      <arg name="topo_map_file" default="$(arg topo_map_file)"/>
+  </include>
+</launch>

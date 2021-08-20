@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="region_name" default="shelf-corner"/>
+
+  <!-- Region search -->  
+  <node pkg="movo_object_search" type="search_in_region.py" name="region_object_search"
+        output="screen">
+    <rosparam command="load" file="$(find movo_object_search)/config/yaml/region_search.yaml"/>
+    <rosparam command="load" file="$(find movo_object_search)/config/yaml/regions_info.yaml"/>
+    <param name="region_name" value="$(arg region_name)"/>
+  </node>
+</launch>

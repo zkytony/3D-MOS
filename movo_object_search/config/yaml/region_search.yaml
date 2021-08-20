@@ -1,0 +1,68 @@
+# These should be changed dynamically
+# region_origin_x: 0.0
+# region_origin_y: 0.0
+# search_space_dimension: 16
+# search_space_resolution: 0.3
+
+# TODO: More flexibly change these parameters
+## Gazebo simualation
+# topo_map_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/maps/test_simple_topo.json"
+# region_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/maps/test_simple_regions.json"
+# region_name: "table_area"
+
+## CIT 122
+topo_map_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/maps/cit122_topo_map.json"
+regions_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/maps/cit122_regions.json"
+# region_name: "shelf-corner" Set in launch file
+
+prior_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/config/yaml/prior.yaml"
+observation_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/tmp/obs_info.yaml"
+action_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/tmp/action_info.yaml"
+done_file: "/home/kaiyuzh/movo_ws/src/movo_tutorials/movo_object_search/tmp/done.txt"  # Just to signal observation writing is done.
+
+# topics
+robot_pose_topic: "/amcl_pose"
+torso_height_topic: "/movo/linear_actuator/joint_states" #x/movo/torso_controller/state"
+head_topic: "/movo/head_controller/state"
+marker_topic: "/movo_pcl_processor/observation_markers"
+point_cloud_topic: "/points"
+
+# # target objects
+# target_object_ids:
+#   - 0
+#   - 1
+#   - 2
+
+# torso
+torso_min: 0.02
+torso_max: 0.51
+
+# These are not used
+# torso_low_thres: 0.06 # below this height, the robot will tilt down to look at the floor.
+# torso_high_thres: 0.44 # above this height, the robot will tilt up to look at the floor.
+# torso_step_size: 0.20
+# tilt_up_angles: 15 # tilting up is rotation around x axis
+# tilt_down_angles: 40 # tilting up is rotation around x axis
+
+# navigation
+goal_tolerance: 0.3
+
+# POMDP viewing frustum parameters
+fov: 60
+aspect_ratio: 1.0
+near: 0.1
+far: 8.0
+
+# real observation model parameters
+sparsity: 500
+occupied_threshold: 3
+mark_nearby: true
+
+# communication wait time
+action_wait_time: 60
+observation_wait_time: 240
+point_cloud_wait_time: 25
+ar_extra_wait_time: 10
+
+# planning
+max_planning_steps: 30

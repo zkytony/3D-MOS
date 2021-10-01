@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Multi-Resolution POMDP Planning for Multi-Object Search in 3D">
+        <title>Multi-Resolution POMDP Planning for Multi-Object Search in 3D</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Custom Style -->
+        <link rel="stylesheet" href="static/main.css"/>
+
+        <!-- Icon -->
+        <link rel="icon" href="static/favicon.ico" type="image/x-icon" />
+
+    </head>
+
+    <body>
+        <div class="container" style="margin-top:5em; margin-bottom:5em">
+            <div class="row justify-content-center">
+                <div class="col-xs-11 col-sm-10 col-md-9 col-lg-8">
+                    <h1>3D-MOS</h1>
+<p>This is our implementation of the 3D Multi-Object Search (3D-MOS) domain modeled
+as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in our paper
+<a href="https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf"><strong>Multi-Resolution POMDP Planning for Multi-Object Search in
+3D</strong></a> (IROS 2021).</p>
+<ul>
+<li><strong>ArXiv</strong>: <a href="https://arxiv.org/abs/2005.02878">https://arxiv.org/abs/2005.02878</a></li>
+<li><strong>PDF</strong>: <a href="https://arxiv.org/pdf/2005.02878.pdf">https://arxiv.org/pdf/2005.02878.pdf</a></li>
+<li><strong>Github</strong>: <a href="https://github.com/zkytony/3D-MOS">https://github.com/zkytony/3D-MOS</a></li>
+<li><strong>Robot demo</strong>: <a href="https://www.youtube.com/watch?v=oo-wrL0ta6k">https://www.youtube.com/watch?v=oo-wrL0ta6k</a></li>
+<li><strong>Website</strong>: <a href="https://zkytony.github.io/3D-MOS/">https://zkytony.github.io/3D-MOS/</a></li>
+<li><strong>Blog</strong> <a href="https://h2r.cs.brown.edu/object-search-in-3d/">https://h2r.cs.brown.edu/object-search-in-3d/</a></li>
+</ul>
+<h2>Demo</h2>
+<div class="row ml-2 mt-3 mb-5">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oo-wrL0ta6k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h2>Talk</h2>
+<div class="row ml-2 mt-3 mb-5">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5G09TRepJLY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h2>Overview</h2>
+<p>Robots operating in human spaces must find objects such as glasses, books,
+or cleaning supplies that could be on the floor, shelves, or tables. This search
+space is naturally 3D.</p>
+<p>When multiple objects must be searched for, such as a cup and a mobile phone, an
+intuitive strategy is to first hypothesize likely search regions for each target
+object based on semantic knowledge or past experience, then search carefully
+within those regions by moving the robot’s camera around the 3D environment. To
+be successful, it is essential for the robot to produce an efficient search
+policy within a designated search region under limited field of view (FOV),
+where target objects could be partially or completely blocked by other
+objects. In this work, we consider the problem setting where a robot must search
+for multiple objects in a search region by actively moving its camera, with as
+few steps as possible.</p>
+<p>Searching for objects in a large search region requires acting over long
+horizons under various sources of uncertainty in a partially observable
+environment. For this reason, previous works have used Partially Observable
+Markov Decision Process (POMDP) as a principled decision-theoretic framework for
+object search. However, to ensure the POMDP is manageable to solve, previous
+works reduce the search space or robot mobility to 2D, although objects exist in
+rich 3D environments. The key challenges lie in the intractability of
+maintaining exact belief due to large state space, and the high branching factor
+for planning due to large observation space.</p>
+<p>In this paper, we present a POMDP formulation for multi-object search in a 3D
+region with a frustum-shaped field-of-view. To efficiently solve this POMDP, we
+propose a multi-resolution planning algorithm based on online Monte-Carlo tree
+search. In this approach, we design a novel octree-based belief representation
+to capture uncertainty of the target objects at different resolution levels,
+then derive abstract POMDPs at lower resolutions with dramatically smaller state
+and observation spaces.</p>
+<p>Evaluation in a simulated 3D domain shows that our approach finds objects more
+efficiently and successfully compared to a set of baselines without resolution
+hierarchy in larger instances under the same computational requirement.</p>
+<p>Finally, we demonstrate our approach on a torso-actuated mobile robot in a lab
+environment. The robot finds 3 out of 6 objects placed at different heights in
+two 10m2 x 2m2 regions in around 15 minutes.</p>
+<h2>Installation <a name="installation"/></h2>
+<p>The required python version is Python 3.6+.</p>
+<ol>
+<li>
+<p>Clone the repository and create and virtual environment with the following lines.</p>
+<pre><code>git clone git@github.com:zkytony/3D-MOS.git
+cd 3D-MOS;
+virtualenv -p python3 venv/mos3d
+source venv/mos3d/bin/activate</code></pre>
+</li>
+<li>
+<p>Install <a href="https://github.com/h2r/pomdp-py">pomdp-py</a></p>
+<pre><code>pip install pomdp-py==1.2.4.5</code></pre>
+<p>(Future <code>pomdp-py</code> versions are expected to be applicable too.)</p>
+</li>
+<li>
+<p>Install the <code>mos3d</code> package. Assume you're at the root of the repository.</p>
+<pre><code>pip install -e .</code></pre>
+</li>
+</ol>
+<h3>System requirements</h3>
+<p>We have only worked on this project using Ubuntu 16.04 and 18.04. It is likely working on 20.04.
+It may or may not work on Windows or Mac. Because the simulator uses <a href="http://pyopengl.sourceforge.net/">PyOpenGL</a>,
+the system is expected to have OpenGL available. The version we last tested on is:</p>
+<pre><code>$ glxinfo | grep &quot;OpenGL version&quot;
+OpenGL version string: 4.6.0 NVIDIA 465.19.01
+</code></pre>
+<p>If you are using Ubuntu on a desktop computer, then you will most likely have OpenGL.</p>
+<h2>Test</h2>
+<p>There are four tests you can run.</p>
+<pre><code>cd tests/
+python test_models.py
+python test_octree_belief.py
+python test_sensor.py
+python test_abstraction.py
+</code></pre>
+<h3>Expected output: test_models.py</h3>
+<pre><code>$ python test_models.py
+pygame 2.0.1 (SDL 2.0.14, Python 3.8.10)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+**N OBJ: 1 **
+[10/10]
+[10/10]
+[10/10]
+[10/10]
+[10/10]
+**N OBJ: 2 **
+[10/10]
+[10/10]
+...
+**N OBJ: 7 **
+[10/10]
+[10/10]
+[10/10]
+[10/10]
+[10/10]
+</code></pre>
+<p>Then a plot will be shown that looks similar to:</p>
+<p><img alt="test_models_plot" src="figs/test_models_plot.png" /></p>
+<p>If there is a warning about "Gimbal lock", please ignore it.</p>
+<h3>Expected output: test_octree_belief.py</h3>
+<pre><code>$ python test_octree_belief.py
+pygame 2.0.1 (SDL 2.0.14, Python 3.8.10)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+** Testing Basics
+0.000244140625
+0.001953125
+0.015625
+0.125
+1.0
+0.9606609347230894
+...
+** Testing belief update
+orange_ricky(3, 2, 3)
+0.08877840909090909
+Observation({(2, 0, 2): (2, 0, 2, free), (0, 1, 0): (0, 1, 0, unknown), .... # a huge list
+orange_ricky(2, 1, 0)
+0.24153830881598135
+Avg sample time (res=1): 0.099
+Avg sample time (res=2): 0.062
+Avg sample time (res=4): 0.039
+</code></pre>
+<p>Two plots will be shown along the way that look like:</p>
+<p><img alt="test_octree_belief_plot1" src="figs/test_octree_belief_plot1.png" /></p>
+<p><img alt="test_octree_belief_plot2" src="figs/test_octree_belief_plot2.png" /></p>
+<h3>Expected output: test_sensor.py</h3>
+<pre><code>$ python test_sensor.py
+pygame 2.0.1 (SDL 2.0.14, Python 3.8.10)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Passed.
+1.5707963267948966
+2.00, 2.00
+20.00, 20.00
+When depth=4, field of view volume contains 19 voxels
+When depth=5, field of view volume contains 44 voxels
+When depth=6, field of view volume contains 69 voxels
+When depth=7, field of view volume contains 118 voxels
+...
+World 4x4x4:
+    In a world of dimensions 4x4x4, d=4 takes up 0.172
+    In a world of dimensions 4x4x4, d=5 takes up 0.312
+    In a world of dimensions 4x4x4, d=6 takes up 0.703
+...
+World 8x8x8:
+    In a world of dimensions 8x8x8, d=4 takes up 0.021
+  **** recommended setting (2\%) for 8x8x8: 4 ****
+    In a world of dimensions 8x8x8, d=5 takes up 0.039
+    In a world of dimensions 8x8x8, d=6 takes up 0.088
+...
+# up to 128x128x128
+</code></pre>
+<h3>Expected output: test_abstraction.py</h3>
+<p>This is basically an example for running plannings in simulated 3D grid worlds.</p>
+<p>The test contains several trials:</p>
+<pre><code># under __main__
+    test_planner(worldocc_small, &quot;flat&quot;, &quot;state_action_abstraction&quot;)
+    test_planner(worldocc_small, &quot;multires&quot;, &quot;state_action_abstraction&quot;)
+    test_planner(worldocc, &quot;multires&quot;, &quot;state_action_abstraction&quot;)
+    test_planner(world32, &quot;multires&quot;, &quot;state_action_abstraction&quot;)
+    test_planner(random_worldstr, &quot;multires&quot;, &quot;state_action_abstraction&quot;)
+</code></pre>
+<p>Here, <code>worldocc_small</code>, <code>world_occ</code>, <code>world32</code>, <code>random_worldstr</code> are string specifications
+of the 3D grid world. <code>multires</code> or <code>flat</code> are the planning algorithms, and <code>state_action_abstraction</code>
+is the type of test to perform.</p>
+<p>The following shows a visualization with a randomly generated 8x8x8 world:</p>
+<p><img src="figs/sim-example-world1.png" width="550px"></p>
+<p>The following shows a visualization with a 4x4x4 world with an occluded target object (behind the gray obstacles):</p>
+<p><img src="figs/sim-example-occ.png" width="550px"></p>
+<h2>Experiment Results</h2>
+<p>You can download the experiment results here:
+*
+*
+After download, unzip each so that the output directory is placed under <code>mos3d/experiments/results</code>.</p>
+<p>Each zip file contains a collection of trials for the experiment.</p>
+<p>The folder for each trial
+contains files including:
+* config.yaml: Configuration for that trial
+* log.txt: Readable log of trial execution
+* history.pkl: A sequence of (action, observation) pairs experienced by the agent in that trial
+* states.pkl: A sequence of states of the environment
+* rewards.yaml: reward obtained at each step
+* trial.pkl: an object that inherits <code>sciex.Trial</code> which was used for running the trial.</p>
+<p>You can replay a trial using the <code>replay.py</code> script. To do this,
+you need to first install <a href="https://github.com/zkytony/sciex"><code>sciex</code></a>:</p>
+<pre><code>pip install sciex==0.2
+</code></pre>
+<p>Then,</p>
+<pre><code>$ cd mos3d/experiments
+$ python replay.py
+pygame 2.0.1 (SDL 2.0.14, Python 3.8.10)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Quality [q] or Scalability [s]? s
+...
+[3650] domain(8-6-6-10-3.0-500-240)_943414_purelyrandom-octree-uniform
+[3651] domain(8-6-6-10-3.0-500-240)_959799_bruteforce-octree-uniform
+[3652] domain(8-6-6-10-3.0-500-240)_959799_hierarchical-octree-uniform
+[3653] domain(8-6-6-10-3.0-500-240)_959799_options-octree-uniform
+[3654] domain(8-6-6-10-3.0-500-240)_959799_pomcp-particles-uniform
+[3655] domain(8-6-6-10-3.0-500-240)_959799_porollout-octree-uniform
+[3656] domain(8-6-6-10-3.0-500-240)_959799_pouct-octree-uniform
+[3657] domain(8-6-6-10-3.0-500-240)_959799_purelyrandom-octree-uniform
+Which trial [1-3657] ? 3652
+</code></pre>
+<p>Then the trial 3652 will replay and you will see a visualization of the environment.
+Replay a different trial by entering the corresponding index.</p>
+<h3>Hardware Spec</h3>
+<p>When conducting the experiments, we equally divided the trials to be completed
+on four computers in our lab with Intel i7 CPUs.</p>
+<pre><code>Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz
+Intel(R) Core(TM) i7-5930K CPU @ 3.50GHz
+Intel(R) Core(TM) i7-5930K CPU @ 3.50GHz
+Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+</code></pre>
+<h2>Citation</h2>
+<p>If you find 3D-MOS helpful to your research, please consider citing:</p>
+<pre><code>@inproceedings{zheng2020multi,
+  title={Multi-Resolution {POMDP} Planning for Multi-Object Search in {3D}},
+  booktitle={IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  author={Zheng, Kaiyu and Sung, Yoonchang and Konidaris, George and Tellex, Stefanie},
+  year={2021}
+}
+</code></pre>
+<h2>Contact</h2>
+<p>Kaiyu Zheng (kaiyu_zheng@brown.edu)</p>
+                </div>
+            </div>
+            <footer class="footer text-justify">
+                <div class="row justify-content-center mt-1">
+                    <a href="http://h2r.cs.brown.edu/">Humans to Robots Lab</a>
+                </div>
+                <div class="row justify-content-center">
+                    Brown University
+                </div>
+                <div class="row justify-content-center mt-2">
+                    <a href="https://brown.edu/"><img src="figs/brownlogo.png" width="30px"></a>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -3,8 +3,10 @@
 This is our implementation of the 3D Multi-Object Search (3D-MOS) domain modeled
 as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in our paper
 [**Multi-Resolution POMDP Planning for Multi-Object Search in
-3D**](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021). IROS RobotCup Best Paper Award.
+3D**](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
+<span style="color:red">IROS RobotCup Best Paper Award.</span>
 
+* **Website**: [https://zkytony.github.io/3D-MOS/](https://zkytony.github.io/3D-MOS/)
 <!-- #<># -->
 
 ## Installation <a name="installation"/>
@@ -174,8 +176,8 @@ The following shows a visualization with a 4x4x4 world with an occluded target o
 ## Experiment Results
 
 You can download the experiment results here:
-*
-*
+* [Scalability.zip](https://drive.google.com/file/d/1ObA8AWkGGQ9OlBpeAjwnB_m_iQ96GZ9K/view?usp=sharing) (1.18GB)
+* [Quality.zip](https://drive.google.com/file/d/1CGrUrSooIho8ZFZayC4G5uPFnbmH4mm_/view?usp=sharing) (170.9MB)
 After download, unzip each so that the output directory is placed under `mos3d/experiments/results`.
 
 Each zip file contains a collection of trials for the experiment.
@@ -226,7 +228,7 @@ Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
 ```
 
 ## Citation
-If you find 3D-MOS helpful to your research, please consider citing:
+If you find 3D-MOS helpful to your research, please consider citing the following paper:
 ```
 @inproceedings{zheng2020multi,
   title={Multi-Resolution {POMDP} Planning for Multi-Object Search in {3D}},

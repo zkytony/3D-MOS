@@ -6,15 +6,11 @@ README_PATH = "../README.md"
 OUTPUT_DIR = "html"
 
 INSERT =\
-"""
-* **ArXiv**: [https://arxiv.org/abs/2005.02878](https://arxiv.org/abs/2005.02878)
+"""* **ArXiv**: [https://arxiv.org/abs/2005.02878](https://arxiv.org/abs/2005.02878)
 * **PDF**: [https://arxiv.org/pdf/2005.02878.pdf](https://arxiv.org/pdf/2005.02878.pdf)
 * **Github**: [https://github.com/zkytony/3D-MOS](https://github.com/zkytony/3D-MOS)
 * **Robot demo**: [https://www.youtube.com/watch?v=oo-wrL0ta6k](https://www.youtube.com/watch?v=oo-wrL0ta6k)
-* **Website**: [https://zkytony.github.io/3D-MOS/](https://zkytony.github.io/3D-MOS/)
 * **Blog** [https://h2r.cs.brown.edu/object-search-in-3d/](https://h2r.cs.brown.edu/object-search-in-3d/)
-
-
 
 ## Demo
 <div class="row ml-2 mt-3 mb-5">

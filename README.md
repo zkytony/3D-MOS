@@ -6,7 +6,7 @@ as the Multi-Resolution POUCT planning algorithm in the paper
 
 Robot demo ([Link to Youtube](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)):
 
-  [<img src="docs/figs/robot-demo.png" width="550">](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
+  [<img src="docs/figs/robot-demo.png" width="500">](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
   
 ## Installation <a name="installation"/>
 

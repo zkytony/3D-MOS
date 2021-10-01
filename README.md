@@ -3,14 +3,7 @@
 This is our implementation of the 3D Multi-Object Search (3D-MOS) domain modeled
 as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in our paper
 [**Multi-Resolution POMDP Planning for Multi-Object Search in
-3D**](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
-
-* **ArXiv**: [https://arxiv.org/abs/2005.02878](https://arxiv.org/abs/2005.02878)
-* **PDF**: [https://arxiv.org/pdf/2005.02878.pdf](https://arxiv.org/pdf/2005.02878.pdf)
-* **Github**: [https://github.com/zkytony/3D-MOS](https://github.com/zkytony/3D-MOS)
-* **Robot demo**: [https://www.youtube.com/watch?v=oo-wrL0ta6k](https://www.youtube.com/watch?v=oo-wrL0ta6k)
-* **Website**: [https://zkytony.github.io/3D-MOS/](https://zkytony.github.io/3D-MOS/)
-* **Blog** [https://h2r.cs.brown.edu/object-search-in-3d/](https://h2r.cs.brown.edu/object-search-in-3d/)
+3D**](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021). IROS RobotCup Best Paper Award.
 
 <!-- #<># -->
 

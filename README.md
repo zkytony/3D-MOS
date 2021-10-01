@@ -5,7 +5,7 @@ as the Multi-Resolution POUCT planning algorithm in the paper
 [Multi-Resolution POMDP Planning for Multi-Object Search in 3D](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
 
 Robot demo ([Link to Youtube](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)):
-   [![world1.png](docs/figs/sim-example-world1.png)](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
+   [![world1.png](docs/figs/robot-demo.png)](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
 
 ## Installation <a name="installation"/>
 

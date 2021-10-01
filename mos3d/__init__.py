@@ -24,3 +24,8 @@ from mos3d.planning.belief.belief import M3Belief
 from mos3d.planning.belief.visual import plot_octree_belief
 from mos3d.planning.agent import M3Agent
 from mos3d.planning.multires import MultiResPlanner
+
+import mos3d
+import sys
+sys.modules["moos3d"] = mos3d
+sys.modules["moos3d.oopomdp"] = mos3d.oopomdp

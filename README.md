@@ -5,7 +5,7 @@ as the Multi-Resolution POUCT planning algorithm in the paper
 [Multi-Resolution POMDP Planning for Multi-Object Search in 3D](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
 
 Robot demo ([Link to Youtube](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)):
-   [![robot_demo.png](docs/figs/robot-demo.png)](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
+   [<img src="docs/figs/robot-demo.png" width="200">](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
 
 ## Installation <a name="installation"/>
 
@@ -167,3 +167,52 @@ The following shows a visualization with a randomly generated 8x8x8 world:
 The following shows a visualization with a 4x4x4 world with an occluded target object (behind the gray obstacles):
 
    ![output_test_abstraction.png](docs/figs/sim-example-occ.png)
+
+
+## Experiment Results
+
+You can download the experiment results here:
+*
+*
+After download, unzip each so that the output directory is placed under `mos3d/experiments/results`.
+
+Each zip file contains a collection of trials for the experiment.
+
+The folder for each trial
+contains files including:
+* config.yaml: Configuration for that trial
+* log.txt: Readable log of trial execution
+* history.pkl: A sequence of (action, observation) pairs experienced by the agent in that trial
+* states.pkl: A sequence of states of the environment
+* rewards.yaml: reward obtained at each step
+* trial.pkl: an object that inherits `sciex.Trial` which was used for running the trial.
+
+You can replay a trial using the `replay.py` script:
+```
+$ cd mos3d/experiments
+$ python replay.py
+pygame 2.0.1 (SDL 2.0.14, Python 3.8.10)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Quality [q] or Scalability [s]? s
+...
+[3650] domain(8-6-6-10-3.0-500-240)_943414_purelyrandom-octree-uniform
+[3651] domain(8-6-6-10-3.0-500-240)_959799_bruteforce-octree-uniform
+[3652] domain(8-6-6-10-3.0-500-240)_959799_hierarchical-octree-uniform
+[3653] domain(8-6-6-10-3.0-500-240)_959799_options-octree-uniform
+[3654] domain(8-6-6-10-3.0-500-240)_959799_pomcp-particles-uniform
+[3655] domain(8-6-6-10-3.0-500-240)_959799_porollout-octree-uniform
+[3656] domain(8-6-6-10-3.0-500-240)_959799_pouct-octree-uniform
+[3657] domain(8-6-6-10-3.0-500-240)_959799_purelyrandom-octree-uniform
+Which trial [1-3657] ? 3652
+```
+Then the trial 3652 will replay and you will see a visualization of the environment.
+
+### Hardware Spec
+When conducting the experiments, we equally divided the trials to be completed
+on four computers in our lab with Intel i7 CPUs.
+```
+Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz
+Intel(R) Core(TM) i7-5930K CPU @ 3.50GHz
+Intel(R) Core(TM) i7-5930K CPU @ 3.50GHz
+Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+```

@@ -1,8 +1,8 @@
 from sciex import Experiment, Trial, Event, Result, YamlResult, PklResult, PostProcessingResult
 from mos3d import *
 import mos3d.util_viz
-from mos3d.tests.trial import init_particles_belief, belief_update
-from mos3d.tests.experiments.result_types import *
+from mos3d.experiments.trial import init_particles_belief, belief_update
+from mos3d.experiments.result_types import *
 import matplotlib.pyplot as plt
 import numpy as np
 import pomdp_py

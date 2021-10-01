@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Replays a trial.
-from mos3d.tests.experiments.runner import StatesResult, HistoryResult
+from mos3d.experiments.runner import StatesResult, HistoryResult
 from mos3d.environment.env import parse_worldstr
 from mos3d.util import print_info, print_error, print_warning, print_success,\
     print_info_bold, print_error_bold, print_warning_bold, print_success_bold, print_note_bold, print_note
@@ -13,7 +13,7 @@ import os
 from collections import deque
 
 # experiments dir path
-RES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results_protected") #"Scalability_Additional")#"results_protected", "used_as_examples")
+RES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "results")
 FRM_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frames")
 
 def play_trial(trial_path, wait=0.3):
@@ -25,7 +25,7 @@ def play_trial(trial_path, wait=0.3):
     history = StatesResult.collect(history_res_path)
 
     with open(os.path.join(trial_path, "config.yaml")) as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.Loader)
         worldstr = config["world_config"]
         gridworld, init_state = parse_worldstr(worldstr)
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     if extype == "q":
         exdir = "Quality"
     elif extype == "s":
-        exdir = "Scalability_Additional"
+        exdir = "Scalability"
     else:
         raise ValueError("Unexpected program state due to extype == %s" % extype)
 
@@ -115,7 +115,11 @@ if __name__ == "__main__":
     else:
         tokens = [token]
 
-    wait = float(input("wait (default 0.3s): "))
+    wait = input("wait (default 0.3s): ")
+    if len(wait) == 0:
+        wait = 0.3
+    else:
+        wait = float(wait)
 
     for t in tokens:
         fname = nummap[int(t)]

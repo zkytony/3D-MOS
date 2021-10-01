@@ -9,6 +9,7 @@ setup(name='mos3d',
           'sciex',
           'numpy',
           'matplotlib',
+          'pandas',
           'pygame',        # for some tests
           'opencv-python',  # for some tests
           'scipy==1.7.0',

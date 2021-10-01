@@ -187,7 +187,12 @@ contains files including:
 * rewards.yaml: reward obtained at each step
 * trial.pkl: an object that inherits `sciex.Trial` which was used for running the trial.
 
-You can replay a trial using the `replay.py` script:
+You can replay a trial using the `replay.py` script. To do this,
+you need to first install [`sciex`](https://github.com/zkytony/sciex):
+```
+pip install sciex==0.2
+```
+Then,
 ```
 $ cd mos3d/experiments
 $ python replay.py
@@ -206,6 +211,7 @@ Quality [q] or Scalability [s]? s
 Which trial [1-3657] ? 3652
 ```
 Then the trial 3652 will replay and you will see a visualization of the environment.
+Replay a different trial by entering the corresponding index.
 
 ### Hardware Spec
 When conducting the experiments, we equally divided the trials to be completed

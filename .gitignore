@@ -75,3 +75,7 @@ tmp/
 assets/aruco/
 maps/useless/
 *.xcf
+
+venv/
+*.mypy_cache
+mos3d/experiments/results

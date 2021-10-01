@@ -211,19 +211,23 @@ is the type of test to perform.</p>
 <p>The following shows a visualization with a 4x4x4 world with an occluded target object (behind the gray obstacles):</p>
 <p><img src="figs/sim-example-occ.png" width="550px"></p>
 <h2>Experiment Results</h2>
-<p>You can download the experiment results here:
-*
-*
-After download, unzip each so that the output directory is placed under <code>mos3d/experiments/results</code>.</p>
+<p>You can download the experiment results here:</p>
+<ul>
+<li><a href="https://drive.google.com/file/d/1ObA8AWkGGQ9OlBpeAjwnB_m_iQ96GZ9K/view?usp=sharing">Scalability.zip</a> (1.18GB)</li>
+<li><a href="https://drive.google.com/file/d/1CGrUrSooIho8ZFZayC4G5uPFnbmH4mm_/view?usp=sharing">Quality.zip</a> (170.9MB)</li>
+</ul>
+<p>After download, unzip each so that the output directory is placed under <code>mos3d/experiments/results</code>.</p>
 <p>Each zip file contains a collection of trials for the experiment.</p>
 <p>The folder for each trial
-contains files including:
-* config.yaml: Configuration for that trial
-* log.txt: Readable log of trial execution
-* history.pkl: A sequence of (action, observation) pairs experienced by the agent in that trial
-* states.pkl: A sequence of states of the environment
-* rewards.yaml: reward obtained at each step
-* trial.pkl: an object that inherits <code>sciex.Trial</code> which was used for running the trial.</p>
+contains files including:</p>
+<ul>
+<li>config.yaml: Configuration for that trial</li>
+<li>log.txt: Readable log of trial execution</li>
+<li>history.pkl: A sequence of (action, observation) pairs experienced by the agent in that trial</li>
+<li>states.pkl: A sequence of states of the environment</li>
+<li>rewards.yaml: reward obtained at each step</li>
+<li>trial.pkl: an object that inherits <code>sciex.Trial</code> which was used for running the trial.</li>
+</ul>
 <p>You can replay a trial using the <code>replay.py</code> script. To do this,
 you need to first install <a href="https://github.com/zkytony/sciex"><code>sciex</code></a>:</p>
 <pre><code>pip install sciex==0.2
@@ -264,8 +268,13 @@ Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
   year={2021}
 }
 </code></pre>
-<h2>Contact</h2>
-<p>Kaiyu Zheng (kaiyu_zheng@brown.edu)</p>
+<h2>People</h2>
+<ul>
+<li><a href="https://kaiyuzheng.me/">Kaiyu Zheng</a> (Brown University)</li>
+<li><a href="https://yoonchangsung.com/">Yoonchang Sung</a> (MIT CSAIL)</li>
+<li><a href="https://cs.brown.edu/people/gdk/">George Konidaris</a> (Brown University)</li>
+<li><a href="https://h2r.cs.brown.edu/people/">Stefanie Tellex</a> (Brown University)</li>
+</ul>
                 </div>
             </div>
             <footer class="footer text-justify">

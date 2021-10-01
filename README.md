@@ -176,14 +176,17 @@ The following shows a visualization with a 4x4x4 world with an occluded target o
 ## Experiment Results
 
 You can download the experiment results here:
+
 * [Scalability.zip](https://drive.google.com/file/d/1ObA8AWkGGQ9OlBpeAjwnB_m_iQ96GZ9K/view?usp=sharing) (1.18GB)
 * [Quality.zip](https://drive.google.com/file/d/1CGrUrSooIho8ZFZayC4G5uPFnbmH4mm_/view?usp=sharing) (170.9MB)
+
 After download, unzip each so that the output directory is placed under `mos3d/experiments/results`.
 
 Each zip file contains a collection of trials for the experiment.
 
 The folder for each trial
 contains files including:
+
 * config.yaml: Configuration for that trial
 * log.txt: Readable log of trial execution
 * history.pkl: A sequence of (action, observation) pairs experienced by the agent in that trial
@@ -238,5 +241,9 @@ If you find 3D-MOS helpful to your research, please consider citing the followin
 }
 ```
 
-## Contact
-Kaiyu Zheng (kaiyu_zheng@brown.edu)
+## People
+
+* [Kaiyu Zheng](https://kaiyuzheng.me/) (Brown University)
+* [Yoonchang Sung](https://yoonchangsung.com/) (MIT CSAIL)
+* [George Konidaris](https://cs.brown.edu/people/gdk/) (Brown University)
+* [Stefanie Tellex](https://h2r.cs.brown.edu/people/) (Brown University)

@@ -5,8 +5,9 @@ as the Multi-Resolution POUCT planning algorithm in the paper
 [Multi-Resolution POMDP Planning for Multi-Object Search in 3D](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
 
 Robot demo ([Link to Youtube](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)):
-   [![robot_demo.png](docs/figs/robot-demo.png)](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
 
+  [<img src="docs/figs/robot-demo.png" width="550">](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
+  
 ## Installation <a name="installation"/>
 
 The required python version is Python 3.6+.
@@ -80,6 +81,7 @@ Hello from the pygame community. https://www.pygame.org/contribute.html
 [10/10]
 ```
 Then a plot will be shown that looks similar to:
+
 ![test_models_plot](docs/figs/test_models_plot.png)
 
 If there is a warning about "Gimbal lock", please ignore it.
@@ -112,6 +114,7 @@ Avg sample time (res=4): 0.039
 Two plots will be shown along the way that look like:
 
 ![test_octree_belief_plot1](docs/figs/test_octree_belief_plot1.png)
+
 ![test_octree_belief_plot2](docs/figs/test_octree_belief_plot2.png)
 
 

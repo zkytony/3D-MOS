@@ -225,3 +225,14 @@ Intel(R) Core(TM) i7-5930K CPU @ 3.50GHz
 Intel(R) Core(TM) i7-5930K CPU @ 3.50GHz
 Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
 ```
+
+## Citation
+If you find 3D-MOS helpful to your research, please consider citing:
+```
+@inproceedings{zheng2020multi,
+  title={Multi-Resolution {POMDP} Planning for Multi-Object Search in {3D}},
+  booktitle={IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  author={Zheng, Kaiyu and Sung, Yoonchang and Konidaris, George and Tellex, Stefanie},
+  year={2021}
+}
+```

@@ -1,12 +1,18 @@
 # 3D-MOS
 
-This is our implementation of the 3D-MOS POMDP domain as well
-as the Multi-Resolution POUCT planning algorithm in the paper
-[Multi-Resolution POMDP Planning for Multi-Object Search in 3D](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
+This is our implementation of the 3D Multi-Object Search (3D-MOS) domain modeled
+as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in our paper
+[**Multi-Resolution POMDP Planning for Multi-Object Search in
+3D**](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
 
-Robot demo ([Link to Youtube](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)):
+* **ArXiv**: [https://arxiv.org/abs/2005.02878](https://arxiv.org/abs/2005.02878)
+* **PDF**: [https://arxiv.org/pdf/2005.02878.pdf](https://arxiv.org/pdf/2005.02878.pdf)
+* **Github**: [https://github.com/zkytony/3D-MOS](https://github.com/zkytony/3D-MOS)
+* **Robot demo**: [https://www.youtube.com/watch?v=oo-wrL0ta6k](https://www.youtube.com/watch?v=oo-wrL0ta6k)
+* **Website**: [https://zkytony.github.io/3D-MOS/](https://zkytony.github.io/3D-MOS/)
+* **Blog** [https://h2r.cs.brown.edu/object-search-in-3d/](https://h2r.cs.brown.edu/object-search-in-3d/)
 
-  [<img src="docs/figs/robot-demo.png" width="500">](https://www.youtube.com/watch?v=oo-wrL0ta6k&feature=emb_title&ab_channel=KaiyuZheng)
+<!-- #<># -->
 
 ## Installation <a name="installation"/>
 
@@ -82,7 +88,7 @@ Hello from the pygame community. https://www.pygame.org/contribute.html
 ```
 Then a plot will be shown that looks similar to:
 
-![test_models_plot](docs/figs/test_models_plot.png)
+![test_models_plot](docs/html/figs/test_models_plot.png)
 
 If there is a warning about "Gimbal lock", please ignore it.
 
@@ -113,9 +119,9 @@ Avg sample time (res=4): 0.039
 ```
 Two plots will be shown along the way that look like:
 
-![test_octree_belief_plot1](docs/figs/test_octree_belief_plot1.png)
+![test_octree_belief_plot1](docs/html/figs/test_octree_belief_plot1.png)
 
-![test_octree_belief_plot2](docs/figs/test_octree_belief_plot2.png)
+![test_octree_belief_plot2](docs/html/figs/test_octree_belief_plot2.png)
 
 
 ### Expected output: test_sensor.py
@@ -165,11 +171,11 @@ is the type of test to perform.
 
 The following shows a visualization with a randomly generated 8x8x8 world:
 
-   ![world1.png](docs/figs/sim-example-world1.png)
+   <img src="docs/html/figs/sim-example-world1.png" width="550px">
 
 The following shows a visualization with a 4x4x4 world with an occluded target object (behind the gray obstacles):
 
-   ![output_test_abstraction.png](docs/figs/sim-example-occ.png)
+   <img src="docs/html/figs/sim-example-occ.png" width="550px">
 
 
 ## Experiment Results
@@ -236,3 +242,6 @@ If you find 3D-MOS helpful to your research, please consider citing:
   year={2021}
 }
 ```
+
+## Contact
+Kaiyu Zheng (kaiyu_zheng@brown.edu)

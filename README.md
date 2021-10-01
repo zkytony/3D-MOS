@@ -32,6 +32,16 @@ The required python version is Python 3.6+.
     pip install -e .
     ```
 
+### System requirements
+We have only worked on this project using Ubuntu 16.04 and 18.04. It is likely working on 20.04.
+It may or may not work on Windows or Mac. Because the simulator uses [PyOpenGL](http://pyopengl.sourceforge.net/),
+the system is expected to have OpenGL available. The version we last tested on is:
+```
+$ glxinfo | grep "OpenGL version"
+OpenGL version string: 4.6.0 NVIDIA 465.19.01
+```
+If you are using Ubuntu on a desktop computer, then you will most likely have OpenGL.
+
 ## Test
 
 There are four tests you can run.

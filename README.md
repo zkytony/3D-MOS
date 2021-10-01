@@ -178,6 +178,7 @@ The following shows a visualization with a 4x4x4 world with an occluded target o
 You can download the experiment results here:
 * [Scalability.zip](https://drive.google.com/file/d/1ObA8AWkGGQ9OlBpeAjwnB_m_iQ96GZ9K/view?usp=sharing) (1.18GB)
 * [Quality.zip](https://drive.google.com/file/d/1CGrUrSooIho8ZFZayC4G5uPFnbmH4mm_/view?usp=sharing) (170.9MB)
+
 After download, unzip each so that the output directory is placed under `mos3d/experiments/results`.
 
 Each zip file contains a collection of trials for the experiment.

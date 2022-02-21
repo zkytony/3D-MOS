@@ -14,7 +14,8 @@ setup(name='mos3d',
           'opencv-python',  # for some tests
           'scipy==1.7.0',
           'PyOpenGL',
-          'PyOpenGL_accelerate'
+          'PyOpenGL_accelerate',
+          'pomdp-py==1.2.4.5'
       ],
       license="MIT",
       author='Kaiyu Zheng',

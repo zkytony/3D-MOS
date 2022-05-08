@@ -12,6 +12,8 @@ as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in 
 * **Robot Demo**: [https://www.youtube.com/watch?v=oo-wrL0ta6k](https://www.youtube.com/watch?v=oo-wrL0ta6k)
 <!-- #<># -->
 
+* **Talk**: [https://www.youtube.com/watch?v=5G09TRepJLY](https://www.youtube.com/watch?v=5G09TRepJLY&feature=emb_title&ab_channel=KaiyuZheng)
+
 * **PDF**: [https://arxiv.org/pdf/2005.02878.pdf](https://arxiv.org/pdf/2005.02878.pdf)
 <!-- #<># -->
 

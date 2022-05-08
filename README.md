@@ -4,7 +4,7 @@ This is our implementation of the 3D Multi-Object Search (3D-MOS) domain modeled
 as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in our paper
 [**Multi-Resolution POMDP Planning for Multi-Object Search in
 3D**](https://kaiyuzheng.me/documents/papers/iros21-3dmos.pdf) (IROS 2021).
-<span style="color:red">IROS RobotCup Best Paper Award.</span>
+**IROS RobotCup Best Paper Award**.
 
 * **Website**: [https://zkytony.github.io/3D-MOS/](https://zkytony.github.io/3D-MOS/)
 <!-- #<># -->
@@ -15,10 +15,9 @@ as a POMDP as well as the Multi-Resolution POUCT planning algorithm proposed in 
 * **PDF**: [https://arxiv.org/pdf/2005.02878.pdf](https://arxiv.org/pdf/2005.02878.pdf)
 <!-- #<># -->
 
-[<img src='https://img.youtube.com/vi/oo-wrL0ta6k/0.jpg' width='400px'>](https://www.youtube.com/watch?v=oo-wrL0ta6k)
+![mos3d-robot](https://user-images.githubusercontent.com/7720184/167313246-f1395027-831f-4463-906b-1bfc41b4ad43.gif)
 
-
-Robots operating in households must find objects on shelves, under tables, and in cupboards. In such environments, it is crucial to search efficiently at 3D scale while coping with limited field of view and the complexity of searching for multiple objects. Principled approaches to object search frequently use Partially Observable Markov Decision Process (POMDP) as the underlying framework for computing search strategies, but constrain the search space in 2D. In this paper, we present a POMDP formulation for multi-object search in a 3D region with a frustum-shaped field-of-view. To efficiently solve this POMDP, we propose a multi-resolution planning algorithm based on online Monte-Carlo tree search. In this approach, we design a novel octree-based belief representation to capture uncertainty of the target objects at different resolution levels, then derive abstract POMDPs at lower resolutions with dramatically smaller state and observation spaces. Evaluation in a simulated 3D domain shows that our approach finds objects more efficiently and successfully compared to a set of baselines without resolution hierarchy in larger instances under the same computational requirement. We demonstrate our approach on a mobile robot to find objects placed at different heights in two 10m2×2m regions by moving its base and actuating its torso.
+Robots operating in households must find objects on shelves, under tables, and in cupboards. In such environments, it is crucial to search efficiently at 3D scale while coping with limited field of view and the complexity of searching for multiple objects. Principled approaches to object search frequently use Partially Observable Markov Decision Process (POMDP) as the underlying framework for computing search strategies, _but constrain the search space in 2D_. In this paper, we present a **POMDP formulation for multi-object search in a 3D region with a frustum-shaped field-of-view.** To efficiently solve this POMDP, we propose a **multi-resolution planning algorithm** based on online Monte-Carlo tree search. In this approach, we design a novel **octree-based belief representation** to capture uncertainty of the target objects at different resolution levels, then derive abstract POMDPs at lower resolutions with dramatically smaller state and observation spaces. Evaluation in a simulated 3D domain shows that our approach finds objects more efficiently and successfully compared to a set of baselines without resolution hierarchy in larger instances under the same computational requirement. We demonstrate our approach on a mobile robot to find objects placed at different heights in two 10m2×2m regions by moving its base and actuating its torso.
 
 
 ## Installation <a name="installation"/>
